@@ -1,38 +1,38 @@
 # Hotel Info Agent - Setup Guide
 
-## 1. Prerequisites
+## Prerequisites
 
-The following are required to work with this project:
+Before running the Hotel Info Agent, make sure the following are installed and configured:
 
 * Python 3.10 or later
 * Git
-* An Azure account with access to the Azure AI project used by the agent
-* Internet connection
-* Required Python packages
+* An Azure account
+* Access to the Azure AI Foundry project used by the agent
+* Appropriate Azure permissions for the project
 
-## 2. Clone the Repository
+## Clone the Repository
 
-Open a terminal and run:
+Clone the GitHub repository:
 
 ```bash
 git clone https://github.com/an1shm7951/Hotel-Info-Agent.git
 ```
 
-Then move into the project directory:
+Navigate to the project directory:
 
 ```bash
 cd Hotel-Info-Agent
 ```
 
-## 3. Create a Virtual Environment
+## Create a Virtual Environment
 
-Create a virtual environment:
+Create a Python virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate it on Windows:
+On Windows, activate it with:
 
 ```bash
 .venv\Scripts\activate
@@ -44,41 +44,60 @@ On macOS or Linux:
 source .venv/bin/activate
 ```
 
-## 4. Install Dependencies
+## Install Dependencies
 
-Install the dependencies required by the project:
+Install the Python packages required by the agent:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 5. Configure the Agent
+The project uses the following Azure Python packages:
 
-Configure the Azure AI project and any required credentials before running the agent.
+* `azure-ai-projects`
+* `azure-identity`
 
-Credentials and API keys should not be committed to the repository.
+## Azure Authentication
 
-If environment variables are required, create a local `.env` file and store the required values there.
+The agent uses `DefaultAzureCredential` from the Azure Identity library to authenticate with Azure.
 
-## 6. Run the Agent
+Make sure you are authenticated with an Azure account that has access to the Azure AI Foundry project.
 
-Run the Python agent using the appropriate Python file from the `src` directory.
+For local development, Azure CLI authentication can be used:
 
-Example:
+```bash
+az login
+```
+
+After signing in, the Python application can use `DefaultAzureCredential` to obtain the required credentials.
+
+## Run the Agent
+
+From the project directory, run the Python file containing the agent code:
 
 ```bash
 python src/agent.py
 ```
 
-The exact command depends on the name and structure of the Python agent file.
+The program connects to the Azure AI Foundry project, retrieves the configured Hotel Concierge agent, creates a conversation thread, sends a user message, processes the agent run, and prints the resulting messages.
 
-## 7. Testing
+## Example Interaction
 
-If test scripts are available, run:
+The example code sends the following message to the agent:
 
-```bash
-pytest
+```text
+Hi Hotel Concierge agent
 ```
 
-Tests should verify that the agent responds appropriately to hotel-related questions and handles unsupported topics correctly.
+The agent then processes the request and prints the conversation messages returned by Azure AI Foundry.
 
+## Troubleshooting
+
+If authentication fails, make sure:
+
+1. You are signed in to the correct Azure account.
+2. Your account has access to the Azure AI Foundry project.
+3. Azure CLI is installed and you have successfully run `az login`.
+4. The project endpoint and agent ID in the Python code are correct.
+
+Never commit passwords, API keys, access tokens, or other sensitive credentials to GitHub.
