@@ -1,18 +1,18 @@
-# Hotel-Info-Agent
-this is a hotel agent which gives answers to customers except for medical, legal, or any law questions.
+# Hotel Info Agent
 
 ## Project Overview
 
-Hotel Info Agent is an AI-powered customer service agent designed to answer questions related to hotel information and customer services. The agent can provide helpful responses to customers about hotel-related topics while avoiding responses to medical, legal, or law-related questions. The project demonstrates how an AI agent can be developed, configured, tested, and organized using Python and Azure AI services.
+Hotel Info Agent is an AI-powered hotel concierge agent developed using Azure AI Foundry. The agent is designed to interact with users and provide helpful responses to hotel-related questions and customer requests. The project demonstrates how an AI agent can be accessed and used programmatically through Python and the Azure AI Projects SDK. The agent connects to an Azure AI Foundry project, creates a conversation thread, sends a user message, processes the agent's response, and displays the resulting conversation.
 
 ## Features
 
-* Answers hotel and customer-related questions.
-* Provides information based on the agent's configured instructions and knowledge.
-* Handles natural-language customer questions.
-* Avoids answering medical, legal, or law-related questions.
-* Organized Python source code for the agent.
-* Includes documentation and testing folders.
+* Connects to an AI agent hosted in Azure AI Foundry.
+* Uses Python to communicate with the Azure AI agent.
+* Creates conversation threads for user interactions.
+* Sends user messages to the Hotel Concierge agent.
+* Processes agent runs and retrieves responses.
+* Displays the conversation messages in the terminal.
+* Uses Azure authentication through `DefaultAzureCredential`.
 
 ## Project Structure
 
@@ -21,9 +21,10 @@ Hotel-Info-Agent/
 │
 ├── README.md
 ├── LICENSE
+├── requirements.txt
 │
 ├── src/
-│   └── [Python agent code]
+│   └── agent.py
 │
 ├── docs/
 │   └── setup.md
@@ -32,25 +33,17 @@ Hotel-Info-Agent/
     └── test_agent.py
 ```
 
-### `/src`
+### src
 
-Contains the Python source code used to implement the Hotel Info Agent.
+Contains the Python source code used to connect to and interact with the Hotel Info Agent in Azure AI Foundry.
 
-### `/docs`
+### docs
 
-Contains documentation for setting up, configuring, and using the project.
+Contains additional documentation and setup instructions for the project.
 
-### `/tests`
+### tests
 
-Contains test scripts used to verify the agent and its functionality.
-
-### `README.md`
-
-Provides an overview of the project, installation instructions, usage examples, contribution guidelines, and license information.
-
-### `LICENSE`
-
-Contains the project's Apache License 2.0 terms.
+Contains test scripts used to verify the project and its required dependencies.
 
 ## Setup and Installation
 
@@ -60,18 +53,19 @@ Before running the project, make sure you have:
 
 * Python 3.10 or later
 * Git
-* Access to the Azure AI project and resources used by the agent
-* The required Python packages listed in `requirements.txt`
+* An Azure account
+* Access to the Azure AI Foundry project containing the Hotel Concierge agent
+* Azure CLI for local Azure authentication
 
 ### Clone the Repository
 
-Clone this repository to your local computer:
+Clone the repository using Git:
 
 ```bash
 git clone https://github.com/an1shm7951/Hotel-Info-Agent.git
 ```
 
-Navigate into the project directory:
+Navigate to the project directory:
 
 ```bash
 cd Hotel-Info-Agent
@@ -85,7 +79,7 @@ Create a Python virtual environment:
 python -m venv .venv
 ```
 
-Activate it on Windows:
+On Windows, activate the virtual environment with:
 
 ```bash
 .venv\Scripts\activate
@@ -105,49 +99,71 @@ Install the required Python packages:
 pip install -r requirements.txt
 ```
 
-If a `requirements.txt` file is not included, install the packages required by the Python agent code and the Azure services used by the project.
+The project uses the following main packages:
 
-### Configuration
+* `azure-ai-projects`
+* `azure-identity`
+* `pytest`
 
-Configure the Azure AI project settings and any required credentials before running the agent.
+## Azure Authentication
 
-Do not upload API keys, passwords, tokens, or other sensitive credentials to GitHub.
+The project uses `DefaultAzureCredential` from the Azure Identity SDK to authenticate with Azure.
 
-If environment variables are required, store them in a local `.env` file and add `.env` to `.gitignore`.
+For local development, sign in to Azure using the Azure CLI:
+
+```bash
+az login
+```
+
+Make sure the signed-in Azure account has access to the Azure AI Foundry project used by the agent.
 
 ## Example Usage
 
-After completing the setup and configuration, run the Python agent from the project directory.
-
-For example:
+Run the agent from the project directory:
 
 ```bash
 python src/agent.py
 ```
 
-The exact Python filename and command may vary depending on the agent implementation.
+The Python program connects to the Azure AI Foundry project and retrieves the configured Hotel Concierge agent.
 
-Example questions that can be asked to the agent include:
+It then creates a conversation thread and sends the following example message:
 
 ```text
-What hotel services are available?
-What facilities does the hotel provide?
-What information can you provide about the hotel?
+Hi Hotel Concierge agent
 ```
 
-The agent is designed to respond to hotel-related questions and avoid providing medical or legal advice.
+The agent processes the request and the resulting conversation messages are displayed in the terminal.
+
+An example output may look similar to:
+
+```text
+Created thread, ID: <thread-id>
+user: Hi Hotel Concierge agent
+assistant: <agent response>
+```
+
+The exact response will depend on the configuration and instructions of the Hotel Concierge agent in Azure AI Foundry.
 
 ## Testing
 
-Test scripts are stored in the `/tests` directory.
+Tests are located in the `tests` directory.
 
-If automated tests are available, they can be run using:
+Run the tests using:
 
 ```bash
 pytest
 ```
 
-The tests can be used to verify that the agent behaves correctly for supported hotel-related questions and appropriately handles unsupported topics.
+The tests verify that the required Python dependencies are available for the project.
+
+## Security
+
+Authentication is handled using Azure's `DefaultAzureCredential`.
+
+Do not commit passwords, API keys, access tokens, or other sensitive credentials to the repository.
+
+Azure credentials should be managed through appropriate Azure authentication methods and environment configuration.
 
 ## Contribution Guidelines
 
@@ -159,9 +175,9 @@ To contribute:
 2. Create a new branch for your changes.
 3. Make and test your changes.
 4. Commit your changes with a clear commit message.
-5. Submit a pull request describing the changes.
+5. Submit a pull request describing your changes.
 
-Please keep contributions focused on improving the functionality, documentation, reliability, or usability of the Hotel Info Agent.
+Please keep contributions focused on improving the agent, documentation, testing, or project organization.
 
 ## License
 
