@@ -1,1 +1,84 @@
+# Hotel Info Agent - Setup Guide
+
+## 1. Prerequisites
+
+The following are required to work with this project:
+
+* Python 3.10 or later
+* Git
+* An Azure account with access to the Azure AI project used by the agent
+* Internet connection
+* Required Python packages
+
+## 2. Clone the Repository
+
+Open a terminal and run:
+
+```bash
+git clone https://github.com/an1shm7951/Hotel-Info-Agent.git
+```
+
+Then move into the project directory:
+
+```bash
+cd Hotel-Info-Agent
+```
+
+## 3. Create a Virtual Environment
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+On macOS or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+## 4. Install Dependencies
+
+Install the dependencies required by the project:
+
+```bash
+pip install -r requirements.txt
+```
+
+## 5. Configure the Agent
+
+Configure the Azure AI project and any required credentials before running the agent.
+
+Credentials and API keys should not be committed to the repository.
+
+If environment variables are required, create a local `.env` file and store the required values there.
+
+## 6. Run the Agent
+
+Run the Python agent using the appropriate Python file from the `src` directory.
+
+Example:
+
+```bash
+python src/agent.py
+```
+
+The exact command depends on the name and structure of the Python agent file.
+
+## 7. Testing
+
+If test scripts are available, run:
+
+```bash
+pytest
+```
+
+Tests should verify that the agent responds appropriately to hotel-related questions and handles unsupported topics correctly.
 
