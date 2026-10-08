@@ -1,1 +1,6 @@
+import importlib
+
+def test_required_packages_are_available():
+assert importlib.util.find_spec("azure.ai.projects") is not None
+assert importlib.util.find_spec("azure.identity") is not None
 
